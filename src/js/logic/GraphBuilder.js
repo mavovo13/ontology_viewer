@@ -29,38 +29,17 @@ class GraphBuilder {
   buildRGraph(ontology) {
     const nodes = [];
     const edges = [];
-    const addedNodeIds = new Set();
 
-    ontology.concepts.forEach(concept => {
-      if (concept.kind === 'R') {
-        nodes.push({
-          data: { id: concept.id, label: concept.label, kind: 'R' },
-        });
-        addedNodeIds.add(concept.id);
+    ontology.rConceptTypeIds.forEach(typeId => {
+      const concept = ontology.concepts.get(typeId);
+      if (concept) {
+        nodes.push({ data: { id: concept.id, label: concept.label, kind: 'R' } });
       }
     });
 
-    ontology.arcRelations.forEach(rel => {
-      [rel.source, rel.target].forEach(conceptId => {
-        if (!addedNodeIds.has(conceptId)) {
-          const concept = ontology.concepts.get(conceptId);
-          if (concept) {
-            nodes.push({
-              data: { id: concept.id, label: concept.label, kind: concept.kind },
-            });
-            addedNodeIds.add(conceptId);
-          }
-        }
-      });
-
+    ontology.rConceptIsaRelations.forEach(rel => {
       edges.push({
-        data: {
-          id: rel.id,
-          source: rel.source,
-          target: rel.target,
-          type: 'ARC',
-          label: rel.label,
-        },
+        data: { id: rel.id, source: rel.source, target: rel.target, type: 'ISA', label: '' },
       });
     });
 

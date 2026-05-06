@@ -83,7 +83,10 @@ class RConceptsView {
       layout: {
         name: 'elk',
         elk: {
-          algorithm: 'stress',
+          algorithm: 'layered',
+          'elk.direction': 'DOWN',
+          'elk.layered.spacing.nodeNodeBetweenLayers': 50,
+          'elk.spacing.nodeNode': 20,
         },
       },
     });
@@ -113,7 +116,15 @@ class RConceptsView {
     if (this._cy && this._needsLayout) {
       this._needsLayout = false;
       this._cy.resize();
-      this._cy.layout({ name: 'elk', elk: { algorithm: 'stress' } }).run();
+      this._cy.layout({
+        name: 'elk',
+        elk: {
+          algorithm: 'layered',
+          'elk.direction': 'DOWN',
+          'elk.layered.spacing.nodeNodeBetweenLayers': 50,
+          'elk.spacing.nodeNode': 20,
+        },
+      }).run();
     }
   }
 

@@ -86,10 +86,12 @@ XMLパース後のルートデータ構造。AppState に保持される。
 ```javascript
 /**
  * @typedef {Object} ParsedOntology
- * @property {Map<string, Concept>} concepts   - 全概念（id → Concept）
- * @property {Relation[]} isaRelations         - ISA継承関係一覧
- * @property {Relation[]} arcRelations         - ARC制約関係一覧
- * @property {string} [fileName]               - 元ファイル名（表示用）
+ * @property {Map<string, Concept>} concepts        - 全概念（id → Concept）
+ * @property {Relation[]} isaRelations              - W_CONCEPTS ISA継承関係一覧
+ * @property {Relation[]} arcRelations              - W_CONCEPTS ARC制約関係一覧（将来利用のため保持）
+ * @property {Set<string>} rConceptTypeIds          - R_CONCEPTSセクション由来の概念ID集合
+ * @property {Relation[]} rConceptIsaRelations      - R_CONCEPTS ISA継承関係一覧
+ * @property {string} [fileName]                    - 元ファイル名（表示用）
  */
 ```
 
@@ -107,6 +109,7 @@ erDiagram
         Map concepts
         Relation[] isaRelations
         Relation[] arcRelations
+        Set rConceptTypeIds
         string fileName
     }
     Concept {

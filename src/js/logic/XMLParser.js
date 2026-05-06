@@ -31,18 +31,22 @@ class XMLParser {
     const concepts = new Map();
     const isaRelations = [];
     const arcRelations = [];
+    const rConceptTypeIds = new Set();
+    const rConceptIsaRelations = [];
 
     if (wConceptsEl) {
       this._parseWConcepts(wConceptsEl, concepts, isaRelations, arcRelations);
     }
 
     if (rConceptsEl) {
-      this._parseRConcepts(rConceptsEl, concepts);
+      this._parseRConcepts(rConceptsEl, concepts, rConceptTypeIds, rConceptIsaRelations);
     }
 
     const fileName = root.getAttribute('filename') || '';
 
-    return { concepts, isaRelations, arcRelations, fileName };
+    return {
+      concepts, isaRelations, arcRelations, rConceptTypeIds, rConceptIsaRelations, fileName,
+    };
   }
 
   _parseWConcepts(wConceptsEl, concepts, isaRelations, arcRelations) {
@@ -128,7 +132,9 @@ class XMLParser {
     });
   }
 
-  _parseRConcepts(rConceptsEl, concepts) {
+  _parseRConcepts(rConceptsEl, concepts, rConceptTypeIds, rConceptIsaRelations) {
+    const labelToId = new Map();
+
     const conceptEls = rConceptsEl.querySelectorAll(':scope > CONCEPT');
     conceptEls.forEach(el => {
       const id = el.getAttribute('id');
@@ -140,6 +146,24 @@ class XMLParser {
       const slots = this._parseSlots(el);
 
       concepts.set(id, { id, label, kind: 'R', slots, isaParents: [] });
+      rConceptTypeIds.add(id);
+      labelToId.set(label, id);
+    });
+
+    const isaEls = rConceptsEl.querySelectorAll(':scope > ISA');
+    isaEls.forEach(el => {
+      const parentLabel = el.getAttribute('parent');
+      const childLabel = el.getAttribute('child');
+      const isaId = el.getAttribute('id') || `risa_${parentLabel}_${childLabel}`;
+
+      const sourceId = labelToId.get(parentLabel);
+      const targetId = labelToId.get(childLabel);
+
+      if (sourceId && targetId) {
+        rConceptIsaRelations.push({
+          id: isaId, source: sourceId, target: targetId, type: 'ISA', label: '',
+        });
+      }
     });
   }
 
