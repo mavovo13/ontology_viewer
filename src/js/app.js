@@ -128,7 +128,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const relatedRelations = [
       ...ontology.isaRelations.filter(r => r.source === conceptId || r.target === conceptId),
       ...ontology.arcRelations.filter(r => r.source === conceptId || r.target === conceptId),
-    ];
+    ].map(rel => {
+      const sourceConcept = ontology.concepts.get(rel.source);
+      const targetConcept = ontology.concepts.get(rel.target);
+      const relationLabel = rel.type === 'ISA'
+        ? 'ISA'
+        : (rel.label || rel.type || 'ARC');
+
+      return {
+        ...rel,
+        sourceLabel: sourceConcept ? sourceConcept.label : rel.source,
+        targetLabel: targetConcept ? targetConcept.label : rel.target,
+        relationLabel,
+      };
+    });
 
     const isaParentsLabeled = concept.isaParents.map(parentId => {
       const parent = ontology.concepts.get(parentId);

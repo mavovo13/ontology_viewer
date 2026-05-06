@@ -93,7 +93,7 @@ class SidePanel {
       relatedRelations.forEach(rel => {
         const li = document.createElement('li');
         li.className = 'side-panel__relation-item';
-        li.textContent = rel.label + ' (' + rel.type + ')';
+        li.textContent = rel.sourceLabel + ' =(' + rel.relationLabel + ')=> ' + rel.targetLabel;
         relList.appendChild(li);
       });
 
