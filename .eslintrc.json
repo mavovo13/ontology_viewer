@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "script"
+  },
+  "ignorePatterns": [
+    "docs/**",
+    ".steering/**"
+  ],
+  "rules": {
+    "indent": ["error", 2],
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "semi": ["error", "always"],
+    "max-len": ["warn", { "code": 100 }],
+    "no-var": "error",
+    "prefer-const": "warn",
+    "no-unused-vars": "warn",
+    "no-console": "warn"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ontology_viewer",
+  "version": "1.0.0",
+  "description": "チームのための**ブラウザ完結・インストール不要**のオントロジービューワー。OE形式のXMLをドラッグ&ドロップするだけで、概念の階層（ISAツリー）と制約関係グラフを切り替えて閲覧できます。",
+  "scripts": {
+    "lint": "eslint \"src/**/*.js\" \"*.js\" --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint \"src/**/*.js\" \"*.js\" --fix --no-error-on-unmatched-pattern"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mavovo13/ontology_viewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mavovo13/ontology_viewer/issues"
+  },
+  "homepage": "https://github.com/mavovo13/ontology_viewer#readme",
+  "devDependencies": {
+    "eslint": "^8.57.1"
+  },
+  "private": true
+}
