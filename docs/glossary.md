@@ -284,6 +284,37 @@
 
 ---
 
+### ThemeSwitcher（テーマスイッチャー）
+
+**定義**: カラーテーマを切り替えるUIコンポーネント。AppStateに依存せず、localStorageで状態を永続化する。
+
+**本プロジェクトでの適用**: `src/js/components/ThemeSwitcher.js` に実装
+
+**サポートテーマ**:
+
+| テーマID | 表示名 | コンセプト |
+|---------|--------|-----------|
+| `nostromo` | NOSTROMO | CRTホスファー（緑）/ デフォルト |
+| `amber` | AMBER | CRTアンバー（琥珀） |
+| `folio` | FOLIO | 淡色 |
+| `void` | VOID | 深黒 |
+
+**テーマ適用方法**: `<html data-theme="[id]">` 属性の付け替えでCSSが切り替わる。デフォルト（nostromo）は属性なし。
+
+**永続化**: `localStorage` キー `ontology-viewer-theme` に保持。
+
+**関連用語**: カラーテーマ、CRTフリッカーオーバーレイ
+
+---
+
+### CRTフリッカーオーバーレイ
+
+**定義**: テーマ切り替え時に画面全体を一瞬点滅させるアニメーション演出。レトロCRTモニターの電源投入時の挙動を模倣する。
+
+**実装**: `.crt-flicker-overlay` クラスのdiv要素をbodyに追加し、アニメーション終了後に削除する。テーマの色変更はフリッカーの中間点（210ms後）に適用される。
+
+---
+
 ### オブザーバーパターン（Observer Pattern）
 
 **定義**: 状態変化を監視するオブジェクト（オブザーバー）が、対象（サブジェクト）に登録し、変化通知を受け取る設計パターン。
@@ -361,3 +392,5 @@ throw new ParseError('W_CONCEPTSまたはR_CONCEPTS要素が見つかりませ�
 | パース済みオントロジー | Parsed Ontology | `ParsedOntology` |
 | アプリ状態 | Application State | `AppState` |
 | 循環ISA | Circular ISA | - |
+| カラーテーマ | Color Theme | `data-theme` 属性 |
+| テーマ切替 | Theme Switcher | `ThemeSwitcher` |

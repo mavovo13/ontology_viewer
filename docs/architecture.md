@@ -18,6 +18,7 @@ Node.js / TypeScript / ビルドツールは使用しない。HTMLファイル�
 |------|-----------|------|----------|
 | Cytoscape.js | 3.x (latest stable) | グラフ描画エンジン | 大規模グラフの安定した描画・豊富なAPI・活発なメンテナンス。vis-network（Canvas日本語問題）・d3-hierarchy（自前実装量大）・dagre-d3（メンテ停止）を比較検討の上で選定 |
 | cytoscape-elk | 2.x (latest stable) | ELKレイアウトエンジン | LAYEREDアルゴリズムによるISA継承ツリーの高品質な自動レイアウト。ELKはJava由来のプロジェクトで、階層グラフレイアウトの精度が高い |
+| Google Fonts | - | Webフォント（JetBrains Mono / VT323 / Major Mono Display） | CDN経由で読み込み。ビルドステップ不要 |
 
 ### 開発ツール
 
@@ -38,8 +39,8 @@ Node.js / TypeScript / ビルドツールは使用しない。HTMLファイル�
 
 ```
 ┌────────────────────────────────────────────────┐
-│   Presentation Layer（UIコンポーネント）          │
-│   FileUploader / ViewToggle / SidePanel         │
+│   Presentation Layer（UIコンポーネント）                    │
+│   FileUploader / ThemeSwitcher / ViewToggle / SidePanel   │
 ├────────────────────────────────────────────────┤
 │   Logic Layer（ビジネスロジック）                 │
 │   XMLParser / GraphBuilder                      │
@@ -59,6 +60,7 @@ Node.js / TypeScript / ビルドツールは使用しない。HTMLファイル�
 - **責務**: ユーザーイベントの受付、状態変化の反映、UI制御
 - **許可**: Logic Layer の呼び出し、State Layer の更新
 - **禁止**: グラフ描画ロジックの直接記述、XMLパース処理
+- **例外**: `ThemeSwitcher` はAppStateに依存せず、localStorageで独立した状態管理を行う
 
 #### Logic Layer
 - **責務**: XMLパース・グラフデータ構築などのビジネスロジック
@@ -93,6 +95,7 @@ src/
       GraphBuilder.js           # Cytoscape用グラフデータ変換
     components/
       FileUploader.js           # ドラッグ&ドロップ / ファイル選択
+      ThemeSwitcher.js          # カラーテーマ切り替え（localStorage永続化・AppState非依存）
       ViewToggle.js             # ビュー切り替えUI
       SidePanel.js              # 概念詳細パネル
     views/

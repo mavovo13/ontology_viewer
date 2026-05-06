@@ -87,24 +87,62 @@ const MAX_FILE_SIZE_MB = 100;
 
 #### CSS Variables の使用
 
+本プロジェクトはCRTレトロ・コンソール風のデザインシステムを採用し、セマンティックな命名体系でCSS Variablesを管理する。
+
+**変数体系**:
+
 ```css
 :root {
-  --color-primary: #4A90D9;
-  --color-success: #7CBF5E;
-  --color-text: #333333;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-}
+  /* 背景レイヤー（void = 宇宙の暗黒）*/
+  --void-000: #05080a;    /* 最暗 */
+  --void-100: #0a0f12;
+  --void-200: #0f1518;
+  --void-300: #141c20;
+  --void-400: #1c262b;
+  --hull-line: #2a3a40;   /* パネル境界線 */
 
-.node-selected {
-  border-color: var(--color-primary);
+  /* ホスファー（メインカラー / CRT緑）*/
+  --phos-500: #7dffb0;    /* 基本テキスト・強調 */
+  --phos-glow: rgba(125, 255, 176, 0.55);
+
+  /* アンバー（サブカラー / 警告・補助）*/
+  --amber-500: #ffb547;
+  --amber-glow: rgba(255, 181, 71, 0.45);
+
+  /* アラート（赤・エラーのみ）*/
+  --alert-500: #ff5d5d;
+
+  /* テキスト */
+  --txt-primary: #c8f7d9;
+  --txt-secondary: #6e9285;
+  --txt-mute: #44615a;
+
+  /* フォント */
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --font-pixel: 'VT323', 'JetBrains Mono', monospace;
+  --font-display: 'Major Mono Display', 'JetBrains Mono', monospace;
 }
+```
+
+**テーマ切り替えの仕組み**:
+
+`<html>` 要素の `data-theme` 属性でテーマを切り替える。デフォルト（nostromo）は属性なし。
+
+```css
+/* デフォルト: nostromo（属性なし） */
+:root { --phos-500: #7dffb0; }
+
+/* amberテーマ */
+[data-theme="amber"] { --phos-500: #ffb547; }
+
+/* folio / void テーマ も同様に上書き */
 ```
 
 **原則**:
 
-- カラー・スペーシング等の値はCSS Variablesで一元管理
+- 色・フォントはCSS Variablesで一元管理し、生の値を直接書かない
 - インラインスタイルはJavaScriptから動的に適用する場合のみ許可（Cytoscapeノードスタイル等）
+- マジックカラー（`#7dffb0` 等）を直接書かず、必ず変数を参照する
 
 ---
 

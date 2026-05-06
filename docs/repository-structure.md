@@ -19,9 +19,10 @@ ontology_viewer/
 │       │   ├── XMLParser.js    # OE形式XMLパース
 │       │   └── GraphBuilder.js # Cytoscape用グラフデータ変換
 │       ├── components/
-│       │   ├── FileUploader.js # ドラッグ&ドロップ / ファイル選択
-│       │   ├── ViewToggle.js   # ビュー切り替えUI
-│       │   └── SidePanel.js    # 概念詳細パネル
+│       │   ├── FileUploader.js  # ドラッグ&ドロップ / ファイル選択
+│       │   ├── ThemeSwitcher.js # カラーテーマ切り替えUI（localStorage永続化）
+│       │   ├── ViewToggle.js    # ビュー切り替えUI
+│       │   └── SidePanel.js     # 概念詳細パネル
 │       └── views/
 │           ├── WConceptsView.js  # W_CONCEPTSビュー（ELK LAYERED）
 │           └── RConceptsView.js  # R_CONCEPTSビュー
@@ -132,6 +133,7 @@ ontology_viewer/
 
 **配置ファイル**:
 - `FileUploader.js`: ドラッグ&ドロップ・ファイル選択ダイアログの制御
+- `ThemeSwitcher.js`: カラーテーマ切り替えUIの制御（localStorage永続化・AppState非依存）
 - `ViewToggle.js`: W_CONCEPTS / R_CONCEPTSビュー切り替えUIの制御
 - `SidePanel.js`: 選択概念の詳細情報パネルの表示制御
 
@@ -141,6 +143,7 @@ ontology_viewer/
 **依存関係**:
 - 依存可能: `state/AppState.js`, ブラウザDOM API
 - 依存禁止: `views/` への直接依存（ViewsはAppState経由で制御）
+- 例外: `ThemeSwitcher.js` はAppStateに依存せず、localStorageで独立した状態管理を行う
 
 ---
 
@@ -219,7 +222,7 @@ ontology_viewer/
 | 初期化スクリプト | `src/js/` | `app.js` 固定 | `app.js` |
 | 状態管理クラス | `src/js/state/` | PascalCase | `AppState.js` |
 | ロジッククラス | `src/js/logic/` | PascalCase + 役割接尾辞 | `XMLParser.js` |
-| UIコンポーネント | `src/js/components/` | PascalCase | `FileUploader.js` |
+| UIコンポーネント | `src/js/components/` | PascalCase | `FileUploader.js`, `ThemeSwitcher.js` |
 | グラフビュー | `src/js/views/` | PascalCase + `View` 接尾辞 | `WConceptsView.js` |
 | サンプルXML | `sample/` | kebab-case | `janken.xml` |
 
