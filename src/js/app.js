@@ -17,6 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const fitBtnEl = document.getElementById('fit-btn');
   const errorBannerEl = document.getElementById('error-banner');
   const fileNameBarEl = document.getElementById('file-name-bar');
+  const hudViewLabel = document.getElementById('hud-view-label');
+  const hudNodes = document.getElementById('hud-nodes');
+  const hudEdges = document.getElementById('hud-edges');
+
+  function updateHudCounts(cy) {
+    if (!cy || !hudNodes || !hudEdges) return;
+    hudNodes.textContent = String(cy.nodes().length).padStart(3, '0');
+    hudEdges.textContent = String(cy.edges().length).padStart(3, '0');
+  }
+
+  function updateHudView(view) {
+    if (hudViewLabel) hudViewLabel.textContent = view;
+  }
 
   wConceptsView.init(wContainerEl);
   rConceptsView.init(rContainerEl);
@@ -82,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wCy = wConceptsView.render(wGraphData);
     rConceptsView.render(rGraphData);
 
+    updateHudCounts(appState.activeView === VIEW_W_CONCEPTS ? wCy : rConceptsView.getCy());
     bindNodeClick(wCy);
 
     const rCy = rConceptsView.getCy();
@@ -101,15 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   appState.subscribe(AppEvents.VIEW_CHANGED, view => {
     viewToggle.setActive(view);
+    updateHudView(view);
     sidePanel.hide();
     appState.setSelectedConcept(null);
 
     if (view === VIEW_W_CONCEPTS) {
       wConceptsView.show();
       rConceptsView.hide();
+      updateHudCounts(wConceptsView.getCy());
     } else {
       wConceptsView.hide();
       rConceptsView.show();
+      updateHudCounts(rConceptsView.getCy());
     }
   });
 

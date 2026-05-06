@@ -24,13 +24,13 @@ class SidePanel {
 
     const kindEl = document.createElement('p');
     kindEl.className = 'side-panel__kind';
-    kindEl.textContent = concept.kind === 'W' ? 'W_CONCEPTS（継承概念）' : 'R_CONCEPTS（制約概念）';
+    kindEl.textContent = concept.kind === 'W' ? 'kind: W_CONCEPT' : 'kind: R_CONCEPT';
     content.appendChild(kindEl);
 
     if (concept.slots && concept.slots.length > 0) {
       const slotHeader = document.createElement('h3');
       slotHeader.className = 'side-panel__section-title';
-      slotHeader.textContent = 'スロット定義';
+      slotHeader.textContent = `SLOTS · ${String(concept.slots.length).padStart(2, '0')}`;
       content.appendChild(slotHeader);
 
       const slotList = document.createElement('ul');
@@ -66,7 +66,7 @@ class SidePanel {
     if (concept.isaParents && concept.isaParents.length > 0) {
       const isaHeader = document.createElement('h3');
       isaHeader.className = 'side-panel__section-title';
-      isaHeader.textContent = 'ISA親概念';
+      isaHeader.textContent = `IS-A · ${String(concept.isaParents.length).padStart(2, '0')}`;
       content.appendChild(isaHeader);
 
       const isaList = document.createElement('ul');
@@ -74,7 +74,8 @@ class SidePanel {
 
       concept.isaParents.forEach(parentId => {
         const li = document.createElement('li');
-        li.textContent = parentId;
+        li.className = 'side-panel__slot-item';
+        li.textContent = '↑ ' + parentId;
         isaList.appendChild(li);
       });
 
@@ -84,7 +85,7 @@ class SidePanel {
     if (relatedRelations && relatedRelations.length > 0) {
       const relHeader = document.createElement('h3');
       relHeader.className = 'side-panel__section-title';
-      relHeader.textContent = '制約関係';
+      relHeader.textContent = `RELATIONS · ${String(relatedRelations.length).padStart(2, '0')}`;
       content.appendChild(relHeader);
 
       const relList = document.createElement('ul');
