@@ -51,8 +51,8 @@ class WConceptsView {
         {
           selector: 'edge',
           style: {
-            'width': 1,
-            'line-color': '#2a3a40',
+            'width': 2,
+            'line-color': '#7dffb0',
             'target-arrow-color': '#7dffb0',
             'target-arrow-shape': 'triangle',
             'curve-style': 'bezier',

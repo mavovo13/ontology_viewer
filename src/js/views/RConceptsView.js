@@ -72,7 +72,7 @@ class RConceptsView {
         {
           selector: 'edge',
           style: {
-            'width': 1,
+            'width': 2,
             'line-color': '#ffb547',
             'target-arrow-color': '#ffb547',
             'target-arrow-shape': 'triangle',
