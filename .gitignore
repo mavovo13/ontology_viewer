@@ -265,3 +265,5 @@ coverage/
 # yarn.lock
 
 .claude/settings.local.json
+
+sample/
