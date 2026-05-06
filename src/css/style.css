@@ -1,0 +1,326 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #2c3e50;
+  --color-header-bg: #2c3e50;
+  --color-header-text: #fff;
+  --color-toggle-active: #4A90D9;
+  --color-toggle-border: #ddd;
+  --color-graph-bg: #f9f9f9;
+  --color-panel-bg: #fff;
+  --color-panel-border: #e0e0e0;
+  --color-error-bg: #fff0f0;
+  --color-error-border: #e74c3c;
+  --color-error-text: #c0392b;
+  --color-drop-zone-border: #bbb;
+  --color-drop-zone-hover: #4A90D9;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-sans);
+  background: #f0f2f5;
+}
+
+/* ===================== Layout ===================== */
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-header-bg);
+  color: var(--color-header-text);
+  padding: 0 20px;
+  height: 52px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.app-header__title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.graph-area {
+  flex: 1;
+  position: relative;
+  background: var(--color-graph-bg);
+  overflow: hidden;
+}
+
+.graph-container {
+  width: 100%;
+  height: 100%;
+}
+
+.side-panel {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--color-panel-bg);
+  border-left: 1px solid var(--color-panel-border);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.side-panel--visible {
+  display: flex;
+}
+
+.side-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-panel-border);
+  background: #f5f7fa;
+}
+
+.side-panel__header-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.side-panel__close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+  padding: 2px 6px;
+}
+
+.side-panel__close:hover {
+  color: #333;
+}
+
+.side-panel__content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.side-panel__concept-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 6px;
+  word-break: break-all;
+}
+
+.side-panel__kind {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.side-panel__section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.side-panel__slot-list,
+.side-panel__isa-list,
+.side-panel__relation-list {
+  list-style: none;
+  padding: 0;
+}
+
+.side-panel__slot-item {
+  font-size: 13px;
+  padding: 4px 0;
+  color: #333;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.side-panel__slot-type {
+  color: #7CBF5E;
+}
+
+.side-panel__slot-cardinality {
+  color: #999;
+  font-size: 12px;
+}
+
+.side-panel__relation-item {
+  font-size: 13px;
+  padding: 4px 0;
+  color: #333;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+/* ===================== View Toggle ===================== */
+
+.view-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-toggle__btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.view-toggle__btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.view-toggle__btn--active {
+  background: var(--color-toggle-active);
+  color: #fff;
+}
+
+/* ===================== Fit Button ===================== */
+
+.fit-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  color: #333;
+  z-index: 10;
+}
+
+.fit-btn:hover {
+  background: #f0f0f0;
+}
+
+/* ===================== Drop Zone ===================== */
+
+.drop-zone {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.drop-zone__inner {
+  border: 2px dashed var(--color-drop-zone-border);
+  border-radius: 12px;
+  padding: 48px 64px;
+  text-align: center;
+  background: #fff;
+  pointer-events: none;
+  transition: border-color 0.15s;
+}
+
+.drop-zone--dragover .drop-zone__inner {
+  border-color: var(--color-drop-zone-hover);
+  background: #f0f7ff;
+}
+
+.drop-zone__icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.drop-zone__text {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.drop-zone__sub {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 16px;
+}
+
+.drop-zone__btn {
+  display: inline-block;
+  background: var(--color-toggle-active);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* ===================== Error Banner ===================== */
+
+.error-banner {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error-text);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  z-index: 20;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  display: none;
+}
+
+.error-banner--visible {
+  display: block;
+}
+
+/* ===================== File name display ===================== */
+
+.file-name-bar {
+  position: absolute;
+  top: 10px;
+  left: 16px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #555;
+  z-index: 10;
+  display: none;
+}
+
+.file-name-bar--visible {
+  display: block;
+}
