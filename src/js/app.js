@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const themeSwitcherEl = document.getElementById('theme-switcher');
+  const themeSwitcher = new ThemeSwitcher(themeSwitcherEl); // eslint-disable-line no-unused-vars
+
   const appState = new AppState();
   const xmlParser = new XMLParser();
   const graphBuilder = new GraphBuilder();
@@ -172,6 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   viewToggle.onChange(view => {
     appState.setActiveView(view);
+  });
+
+  document.addEventListener('ontology-theme-change', ({ detail }) => {
+    wConceptsView.updateTheme(detail.themeId);
+    rConceptsView.updateTheme(detail.themeId);
   });
 
   fitBtnEl.addEventListener('click', () => {

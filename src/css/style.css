@@ -753,3 +753,266 @@ body::after {
 @media (max-width: 800px) {
   .hud-stack { display: none; }
 }
+
+/* =====================================================================
+   THEMES — CSS Variable Overrides
+   ===================================================================== */
+
+/* ---- AMBER: warm sepia-black / amber phosphor ---------------------- */
+:root[data-theme="amber"] {
+  --void-000: #080600;
+  --void-100: #0e0b00;
+  --void-200: #141000;
+  --void-300: #1c1600;
+  --void-400: #261e00;
+  --hull-line: #3a2e00;
+  --hull-line-soft: #241e00;
+
+  --phos-500: #ffb547;
+  --phos-400: #e8a030;
+  --phos-600: #ffc878;
+  --phos-glow: rgba(255, 181, 71, 0.55);
+  --phos-dim: rgba(255, 181, 71, 0.22);
+  --phos-faint: rgba(255, 181, 71, 0.08);
+
+  --amber-500: #7dffb0;
+  --amber-400: #5ee599;
+  --amber-glow: rgba(125, 255, 176, 0.45);
+  --amber-faint: rgba(125, 255, 176, 0.08);
+
+  --alert-500: #ff5d5d;
+  --alert-glow: rgba(255, 93, 93, 0.45);
+
+  --txt-primary: #ffe8c0;
+  --txt-secondary: #a08050;
+  --txt-mute: #604030;
+}
+
+/* ---- FOLIO: cream paper / graph notebook / ink blue ---------------- */
+:root[data-theme="folio"] {
+  --void-000: #f8f6f0;
+  --void-100: #f3f0e8;
+  --void-200: #ede9df;
+  --void-300: #e5e0d4;
+  --void-400: #d8d2c4;
+  --hull-line: #b8cde0;
+  --hull-line-soft: #d0e0ec;
+
+  --phos-500: #2a5f8f;
+  --phos-400: #1e4d7a;
+  --phos-600: #3672a6;
+  --phos-glow: rgba(42, 95, 143, 0.3);
+  --phos-dim: rgba(42, 95, 143, 0.15);
+  --phos-faint: rgba(42, 95, 143, 0.05);
+
+  --amber-500: #c0392b;
+  --amber-400: #a93226;
+  --amber-glow: rgba(192, 57, 43, 0.35);
+  --amber-faint: rgba(192, 57, 43, 0.06);
+
+  --alert-500: #e74c3c;
+  --alert-glow: rgba(231, 76, 60, 0.45);
+
+  --txt-primary: #1a2a3a;
+  --txt-secondary: #4a6a8a;
+  --txt-mute: #8aa0b0;
+}
+
+/* ---- VOID: pure black / monochrome --------------------------------- */
+:root[data-theme="void"] {
+  --void-000: #080808;
+  --void-100: #0e0e0e;
+  --void-200: #141414;
+  --void-300: #1c1c1c;
+  --void-400: #282828;
+  --hull-line: #404040;
+  --hull-line-soft: #2a2a2a;
+
+  --phos-500: #d0d0d0;
+  --phos-400: #b0b0b0;
+  --phos-600: #e8e8e8;
+  --phos-glow: rgba(200, 200, 200, 0.3);
+  --phos-dim: rgba(200, 200, 200, 0.15);
+  --phos-faint: rgba(200, 200, 200, 0.05);
+
+  --amber-500: #888888;
+  --amber-400: #707070;
+  --amber-glow: rgba(136, 136, 136, 0.3);
+  --amber-faint: rgba(136, 136, 136, 0.06);
+
+  --alert-500: #ff5d5d;
+  --alert-glow: rgba(255, 93, 93, 0.45);
+
+  --txt-primary: #c0c0c0;
+  --txt-secondary: #707070;
+  --txt-mute: #404040;
+}
+
+/* =====================================================================
+   THEME-SPECIFIC BACKGROUND OVERRIDES (hardcoded values)
+   ===================================================================== */
+
+/* ---- AMBER: warm amber stars + grid -------------------------------- */
+[data-theme="amber"] body::before {
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,220,130,0.6), transparent 50%),
+    radial-gradient(1px 1px at 78% 62%, rgba(255,220,130,0.4), transparent 50%),
+    radial-gradient(1px 1px at 33% 81%, rgba(255,200,100,0.5), transparent 50%),
+    radial-gradient(1px 1px at 88% 24%, rgba(125,255,176,0.3), transparent 50%),
+    radial-gradient(1px 1px at 55% 9%,  rgba(255,220,130,0.35), transparent 50%),
+    radial-gradient(1px 1px at 22% 47%, rgba(255,200,100,0.3), transparent 50%),
+    linear-gradient(rgba(255,181,71,0.025) 1px, transparent 1px) 0 0 / 100% 32px,
+    linear-gradient(90deg, rgba(255,181,71,0.025) 1px, transparent 1px) 0 0 / 32px 100%,
+    radial-gradient(ellipse at 50% 40%, #1a1200 0%, #080600 70%);
+}
+
+[data-theme="amber"] .graph-area {
+  background: radial-gradient(ellipse at 50% 50%, #1a1200 0%, #080600 75%);
+}
+
+[data-theme="amber"] .graph-area > .reticle {
+  background:
+    linear-gradient(rgba(255,181,71,0.04) 1px, transparent 1px) 0 0 / 100% 40px,
+    linear-gradient(90deg, rgba(255,181,71,0.04) 1px, transparent 1px) 0 0 / 40px 100%;
+}
+
+/* ---- FOLIO: graph paper grid, no stars ----------------------------- */
+[data-theme="folio"] body::before {
+  background:
+    linear-gradient(rgba(184,205,224,0.45) 1px, transparent 1px) 0 0 / 100% 32px,
+    linear-gradient(90deg, rgba(184,205,224,0.45) 1px, transparent 1px) 0 0 / 32px 100%,
+    var(--void-000);
+}
+
+[data-theme="folio"] body::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0,
+    rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0.03) 3px,
+    rgba(0,0,0,0) 4px
+  );
+}
+
+[data-theme="folio"] .graph-area {
+  background: radial-gradient(ellipse at 50% 50%, #ede9df 0%, #f3f0e8 75%);
+  box-shadow:
+    inset 0 0 0 1px rgba(42,95,143,0.06),
+    inset 0 0 80px rgba(42,95,143,0.04);
+}
+
+[data-theme="folio"] .graph-area > .reticle {
+  background:
+    linear-gradient(rgba(184,205,224,0.3) 1px, transparent 1px) 0 0 / 100% 40px,
+    linear-gradient(90deg, rgba(184,205,224,0.3) 1px, transparent 1px) 0 0 / 40px 100%;
+}
+
+[data-theme="folio"] .file-name-bar {
+  background: rgba(240, 238, 230, 0.96);
+  box-shadow: 0 0 12px rgba(0,0,0,0.12);
+}
+
+[data-theme="folio"] .drop-zone__inner {
+  background: linear-gradient(180deg, rgba(240,238,230,0.96), rgba(248,246,240,0.96));
+  box-shadow:
+    inset 0 0 0 1px rgba(42,95,143,0.06),
+    inset 0 0 60px rgba(42,95,143,0.03),
+    0 0 60px rgba(0,0,0,0.12);
+}
+
+/* ---- VOID: monochrome stars + grid --------------------------------- */
+[data-theme="void"] body::before {
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgba(200,200,200,0.5), transparent 50%),
+    radial-gradient(1px 1px at 78% 62%, rgba(200,200,200,0.35), transparent 50%),
+    radial-gradient(1px 1px at 33% 81%, rgba(200,200,200,0.45), transparent 50%),
+    radial-gradient(1px 1px at 88% 24%, rgba(200,200,200,0.3), transparent 50%),
+    radial-gradient(1px 1px at 55% 9%,  rgba(200,200,200,0.3), transparent 50%),
+    radial-gradient(1px 1px at 22% 47%, rgba(200,200,200,0.25), transparent 50%),
+    linear-gradient(rgba(200,200,200,0.02) 1px, transparent 1px) 0 0 / 100% 32px,
+    linear-gradient(90deg, rgba(200,200,200,0.02) 1px, transparent 1px) 0 0 / 32px 100%,
+    radial-gradient(ellipse at 50% 40%, #101010 0%, #080808 70%);
+}
+
+[data-theme="void"] .graph-area {
+  background: radial-gradient(ellipse at 50% 50%, #0e0e0e 0%, #080808 75%);
+}
+
+[data-theme="void"] .graph-area > .reticle {
+  background:
+    linear-gradient(rgba(200,200,200,0.03) 1px, transparent 1px) 0 0 / 100% 40px,
+    linear-gradient(90deg, rgba(200,200,200,0.03) 1px, transparent 1px) 0 0 / 40px 100%;
+}
+
+/* =====================================================================
+   THEME SWITCHER UI
+   ===================================================================== */
+
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--hull-line);
+  border-radius: 2px;
+  background: var(--void-300);
+}
+
+.theme-switcher__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--txt-mute);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-right: 2px;
+  user-select: none;
+}
+
+.theme-chip {
+  width: 16px;
+  height: 16px;
+  border-radius: 1px;
+  border: 1px solid var(--hull-line);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+}
+
+.theme-chip:hover {
+  transform: scale(1.25);
+  border-color: var(--phos-500);
+}
+
+.theme-chip--active {
+  border-color: var(--phos-500);
+  box-shadow: 0 0 6px var(--phos-glow);
+  transform: scale(1.15);
+}
+
+.theme-chip[data-theme-id="nostromo"] { background: #7dffb0; }
+.theme-chip[data-theme-id="amber"]    { background: #ffb547; }
+.theme-chip[data-theme-id="folio"]    { background: #f8f6f0; border-color: #b8cde0; }
+.theme-chip[data-theme-id="void"]     { background: #d0d0d0; }
+
+/* =====================================================================
+   CRT FLICKER ANIMATION
+   ===================================================================== */
+
+.crt-flicker-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  pointer-events: none;
+  z-index: 99999;
+  animation: crt-flicker 0.42s linear forwards;
+}
+
+@keyframes crt-flicker {
+  0%,  14% { opacity: 0;    }
+  15%, 29% { opacity: 0.85; }
+  30%, 49% { opacity: 0.05; }
+  50%, 64% { opacity: 0.92; }
+  65%, 79% { opacity: 0.08; }
+  80%, 98% { opacity: 0.62; }
+  99%,100% { opacity: 0;    }
+}
