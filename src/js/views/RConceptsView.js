@@ -2,6 +2,7 @@ class RConceptsView {
   constructor() {
     this._cy = null;
     this._containerEl = null;
+    this._needsLayout = false;
   }
 
   init(containerEl) {
@@ -14,6 +15,7 @@ class RConceptsView {
       this._cy = null;
     }
 
+    this._needsLayout = true;
     this._cy = cytoscape({
       container: this._containerEl,
       elements: { nodes, edges },
@@ -108,6 +110,11 @@ class RConceptsView {
 
   show() {
     this._containerEl.style.display = 'block';
+    if (this._cy && this._needsLayout) {
+      this._needsLayout = false;
+      this._cy.resize();
+      this._cy.layout({ name: 'elk', elk: { algorithm: 'stress' } }).run();
+    }
   }
 
   hide() {

@@ -100,29 +100,30 @@ class XMLParser {
         const rcId = rcEl.getAttribute('id') || '';
         const rcLabel = rcEl.getAttribute('label') || '';
 
+        if (!rcId) return;
+
+        if (!concepts.has(rcId)) {
+          concepts.set(rcId, { id: rcId, label: rcLabel, kind: 'R', slots: [], isaParents: [] });
+        }
+
         const arcEls = rcEl.querySelectorAll(':scope > ARC');
-        const arcConceptIds = [];
+        const addedConceptIds = new Set();
 
         arcEls.forEach(arcEl => {
           const arcValue = arcEl.textContent.trim();
           const conceptLabel = arcValue.split('$')[0];
           const arcConceptId = labelToId.get(conceptLabel);
-          if (arcConceptId && !arcConceptIds.includes(arcConceptId)) {
-            arcConceptIds.push(arcConceptId);
-          }
-        });
-
-        for (let i = 0; i < arcConceptIds.length - 1; i++) {
-          for (let j = i + 1; j < arcConceptIds.length; j++) {
+          if (arcConceptId && !addedConceptIds.has(arcConceptId)) {
+            addedConceptIds.add(arcConceptId);
             arcRelations.push({
-              id: `${rcId}_arc_${i}_${j}`,
-              source: arcConceptIds[i],
-              target: arcConceptIds[j],
+              id: `${rcId}_arc_${arcConceptId}`,
+              source: arcConceptId,
+              target: rcId,
               type: 'ARC',
               label: rcLabel,
             });
           }
-        }
+        });
       });
     });
   }

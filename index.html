@@ -6,7 +6,9 @@
   <title>Ontology Viewer</title>
   <link rel="stylesheet" href="src/css/style.css">
   <script src="https://unpkg.com/cytoscape@3.31.0/dist/cytoscape.min.js"></script>
-  <script src="https://unpkg.com/cytoscape-elk@2.2.0/cytoscape-elk.js"></script>
+  <script src="https://unpkg.com/elkjs@0.8.2/lib/elk.bundled.js"></script>
+  <script src="https://unpkg.com/cytoscape-elk@2.2.0/dist/cytoscape-elk.js"></script>
+  <script>cytoscape.use(cytoscapeElk);</script>
 </head>
 <body>
   <div class="app-layout">
