@@ -267,3 +267,4 @@ coverage/
 .claude/settings.local.json
 
 sample/
+.playwright-mcp/
